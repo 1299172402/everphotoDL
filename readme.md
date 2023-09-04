@@ -11,6 +11,34 @@ keywords: 时光相册, 打包下载, 批量下载, 全部下载
 - 断点续传，不用担心下到一半断开
 - 直接下载就是照片，不用再额外解压占用空间
 
+## 如何使用
+
+### 参数设置
+先设置参数，在`main.py`开头部分设置下载路径，***下载令牌token***，以及其他选项
+```
+# 下载路径
+DL_PATH = r"D:\EverPhoto"
+# 下载令牌
+DL_TOKEN = "Bearer ABCDEFGHIJKLMNOPQRSTUVWX"
+# 下载线程数
+DL_THREAD = 16
+# 不显示下载完成的输出
+DL_SKIP_NOTICE = False
+# 只校验MD5，不下载文件
+DL_ONLY_CHECK_MD5 = False
+```
+
+### 运行
+运行直到所有照片下载完成
+```
+python main.py
+```
+
+在下载路径文件夹中的02-download_picture文件夹中查看照片
+
+### 如何获取token
+参见：https://github.com/1299172402/EverPhotoCheckin
+
 ## 接口来源
 
 - 时光相册手机最后一版v6.6.0的api
