@@ -13,31 +13,21 @@ keywords: 时光相册, 打包下载, 批量下载, 全部下载
 
 ## 如何使用
 
-### 参数设置
-先设置参数，在`main.py`开头部分设置下载路径，***下载令牌token***，以及其他选项
+程序内有详细的说明
 ```
-# 下载路径
-DL_PATH = r"D:\EverPhoto"
-# 下载令牌
-DL_TOKEN = "Bearer ABCDEFGHIJKLMNOPQRSTUVWX"
-# 下载线程数
-DL_THREAD = 16
-# 不显示下载完成的输出
-DL_SKIP_NOTICE = False
-# 只校验MD5，不下载文件
-DL_ONLY_CHECK_MD5 = False
-```
+时光相册下载器
+作者：之雨
+Github开源地址: https://github.com/1299172402/everphotoDL
 
-### 运行
-运行直到所有照片下载完成
-```
-python main.py
-```
+请按照以下步骤操作：
+1. 登录时光相册
+2. 设置下载路径 D:/EverPhoto
+3. 下载原始数据
+4. 批量下载图片和视频
+0. 退出程序
+请输入数字：
 
-在下载路径文件夹中的02-download_picture文件夹中查看照片
-
-### 如何获取token
-参见：https://github.com/1299172402/EverPhotoCheckin
+```
 
 ## 接口来源
 
@@ -54,6 +44,12 @@ python main.py
 - [ ] (低优先级)人脸信息`https://openapi.everphoto.cn/sf/3/v4/GetAssetFaceFeature`
 - [ ] (低优先级)位置信息`https://openapi.everphoto.cn/v1/locations`
 - [ ] (低优先级)为程序设计图形界面
+
+## 打包方式
+
+```
+pyinstaller --noconfirm --onefile --console --icon "kite.ico"  "main.py"
+```
 
 ## 其他说明
 
