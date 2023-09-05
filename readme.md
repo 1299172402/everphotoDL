@@ -11,6 +11,21 @@ keywords: 时光相册, 打包下载, 批量下载, 全部下载
 - 断点续传，不用担心下到一半断开
 - 直接下载就是照片，不用再额外解压占用空间
 
+## 下载地址
+
+- Github Release
+  
+  [![img](https://img.shields.io/github/v/release/1299172402/BBDown_GUI?label=%E7%89%88%E6%9C%AC)](https://github.com/1299172402/BBDown_GUI/releases)
+  
+- 蓝奏云
+
+  [![](https://img.shields.io/badge/蓝奏云盘-密码:ever-blue)](https://zhiyuyu.lanzout.com/b09d8e0af) 
+
+- Github Action (beta)
+  
+  [![Python application](https://github.com/1299172402/everphotoDL/actions/workflows/build.yml/badge.svg)](https://github.com/1299172402/everphotoDL/actions/workflows/build.yml)
+
+
 ## 如何使用
 
 程序内有详细的说明
@@ -24,7 +39,6 @@ Github开源地址: https://github.com/1299172402/everphotoDL
 2. 设置下载路径 D:/EverPhoto
 3. 下载原始数据
 4. 批量下载图片和视频
-0. 退出程序
 请输入数字：
 
 ```
@@ -43,7 +57,7 @@ Github开源地址: https://github.com/1299172402/everphotoDL
 - [ ] 按文件夹分类存放，来源为上传时的文件夹，无来源的放在根文件夹
 - [ ] (低优先级)人脸信息`https://openapi.everphoto.cn/sf/3/v4/GetAssetFaceFeature`
 - [ ] (低优先级)位置信息`https://openapi.everphoto.cn/v1/locations`
-- [ ] (低优先级)为程序设计图形界面
+- [x] (低优先级)为程序设计图形界面
 
 ## 打包方式
 
