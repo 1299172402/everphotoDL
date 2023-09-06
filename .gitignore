@@ -6,4 +6,5 @@ config.json
 
 build
 dist
-main.spec
+*.spec
+*.exe
