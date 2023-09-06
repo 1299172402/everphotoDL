@@ -32,7 +32,7 @@ def download_picture(asset, token, dl_path, output_succeed):
 
     if os.path.exists(filepath) == True:
         if check_md5(filepath, asset['md5']) == True:
-            print(f'[成功] {filename} 文件已下载，校验成功') if output_succeed == True else None
+            print(f'[跳过] {filename} 文件已下载，校验成功') if output_succeed == True else None
             return 'check_succeed'
         else:
             os.remove(filepath)
@@ -48,7 +48,7 @@ def download_picture(asset, token, dl_path, output_succeed):
         f.write(res.content)
     # check md5
     if check_md5(filepath, asset['md5']) == True:
-        print(f'[成功] {filename} 文件下载成功，校验成功') if output_succeed == True else None
+        print(f'[成功] {filename} 文件下载成功，校验成功')
         return 'download_succeed'
     else:
         os.remove(filepath)
@@ -70,14 +70,19 @@ def interface():
     print("时光相册下载器")
     print("当前进度：4. 批量下载图片")
     print("")
+    print("正在检查第3步是否完成...")
+    if os.path.exists('original_response') == False:
+        print("第3步未完成，请先完成第3步下载原始数据")
+        input('按下回车键继续...')
+        return
     print("正在加载token...")
     TOKEN = load_token()
     print("正在加载下载路径...")
     DL_PATH = load_dl_path()
-    print("请输入同时下载数（默认为16）：")
+    print("请输入同时下载数（默认为 16 ）：")
     thread_num = int(input() or 16)
-    print("是否显示 [成功] 的信息：")
-    print("1. 是")
+    print("是否显示 [跳过] 的信息：")
+    print("1. 是（默认）")
     print("2. 否")
     choice = input("请输入数字：") or "1"
     if choice == "1":
