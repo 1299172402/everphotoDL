@@ -31,6 +31,7 @@ def interface():
     print("2. " + ("（上一次操作）" if prev_choice == "2" else "") + "设置下载路径" + f" {load_dl_path()} ")
     print("3. " + ("（上一次操作）" if prev_choice == "3" else "") + "下载原始数据")
     print("4. " + ("（上一次操作）" if prev_choice == "4" else "") + "批量下载图片和视频")
+    print("0. 退出程序")
     print("请输入数字：")
     choice = input()
     prev_choice = choice
@@ -42,6 +43,8 @@ def interface():
         get_original_message.interface()
     elif choice == "4":
         dl_picture.interface()
+    elif choice == "0":
+        return 'exit'
     else:
         print("请输入正确的数字")
 
@@ -53,5 +56,6 @@ if __name__ == '__main__':
                 "dl_path": "D:/EverPhoto"
             }, ensure_ascii=False, indent=4))
     
-    while True:
-        interface()
+    res = ''
+    while res != 'exit':
+        res = interface()
