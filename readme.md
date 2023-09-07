@@ -34,11 +34,20 @@ keywords: 时光相册, 打包下载, 批量下载, 全部下载
 作者：之雨
 Github开源地址: https://github.com/1299172402/everphotoDL
 
-请按照以下步骤操作：
-1. 登录时光相册
+下载功能
+请按照以下步骤一步步操作：
+1. 登录时光相册 
 2. 设置下载路径 D:/EverPhoto
-3. 下载原始数据
+3. 下载相册的元数据
 4. 批量下载图片和视频
+
+整理功能
+5. 智能整理照片（推荐）
+6. 按时间整理
+7. 恢复照片路径到整理前
+
+0. 退出程序
+
 请输入数字：
 
 ```
@@ -51,10 +60,11 @@ Github开源地址: https://github.com/1299172402/everphotoDL
 
 ## 待办事项
 
+- [x] 按文件夹分类存放，来源为上传时的文件夹，无来源的放在根文件夹
+- [x] 按上传时间、照片时间分类存放
 - [ ] 为了方便整理，每个图片文件都的信息都放到一个单独的json中（包括上传时间`uploadedAt`，拍摄时间`creationTime` `taken`，宽`width`，高`height`，在手机时的路径（包括原始文件名）`source_path`，EXIF信息`exif`，文件大小`size`，文件校验`md5`）
 - [ ] OCR文本识别的内容 `https://openapi.everphoto.cn/sf/3/v4/GetAssetCvInfo`
 - [ ] 标签归类，包括自建的相册，人物分类，或者截屏、风景、美食等时光相册自动打的tag
-- [ ] 按文件夹分类存放，来源为上传时的文件夹，无来源的放在根文件夹
 - [ ] (低优先级)人脸信息`https://openapi.everphoto.cn/sf/3/v4/GetAssetFaceFeature`
 - [ ] (低优先级)位置信息`https://openapi.everphoto.cn/v1/locations`
 - [x] (低优先级)为程序设计图形界面
