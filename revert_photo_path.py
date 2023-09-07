@@ -1,7 +1,6 @@
 import os
 import json
-
-from concurrent.futures import ThreadPoolExecutor
+import sqlite3
 
 def move_picture(dl_path, source, target):
     if os.path.exists(f"{dl_path}/{target}") == True:
@@ -13,14 +12,14 @@ def move_picture(dl_path, source, target):
 
 def revert_photo_path():
     dl_path = json.load(open('config.json', 'r', encoding='utf-8'))['dl_path']
-    with open('move_record.json', 'r', encoding='utf-8') as f:
-        record = json.load(f)
-    for item in record:
-        source = item['source']
-        target = item['target']
-        with ThreadPoolExecutor(max_workers=30) as executor:
-            executor.submit(move_picture, dl_path, source, target)
-    os.remove('move_record.json')
+    conn = sqlite3.connect('move_record.db')
+    c = conn.cursor()
+    c.execute('SELECT source, target FROM move_record')
+    record = c.fetchall()
+    conn.close()
+    for source, target in record:
+        move_picture(dl_path, source, target)
+    os.remove('move_record.db')
     for item in os.listdir(dl_path):
         if os.path.isdir(f"{dl_path}/{item}") == True:
             try:
@@ -38,8 +37,8 @@ def interface():
     print("1. 整理后已移动或重命名的文件无法恢复到之前的路径，将跳过")
     print("")
     print("正在检测是否整理过...")
-    if os.path.exists('move_record.json') == False:
-        print("未检测到move_record.json，未整理过")
+    if os.path.exists('move_record.db') == False:
+        print("未检测到move_record.db，未整理过")
         input("按回车键继续...")
         return
     print("是否恢复到整理之前：")

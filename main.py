@@ -36,7 +36,7 @@ def interface():
     print("4. 批量下载图片和视频")
     print("")
     print("整理功能")
-    print("5. 智能整理照片")
+    print("5. 智能整理照片（推荐）")
     print("6. 按时间整理")
     print("7. 恢复照片路径到整理前")
     print("")
