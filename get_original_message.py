@@ -109,15 +109,21 @@ def calc_picture_num():
 def interface():
     os.system('cls')
     print("时光相册下载器")
-    print("当前进度：3. 下载原始数据")
+    print("当前进度：3. 下载相册的元数据")
     print("")
     print("注意事项：")
     print("1. 如果遇到 [失败] ，请重复下载原始数据，直到成功为止")
     print("2. [超时] 的情况系统会自动重试，无需手动操作")
-    print("3. 如图片和视频的数量小于时光相册APP上显示的数量，请重试")
+    print("3. 如果图片和视频的数量小于时光相册APP上显示的数量，请重试")
+    print("4. 如果图片和视频的数量大于时光相册APP上显示的数量，表示曾重复上传某一图片，没有关系")
     print("")
     print("正在加载token...")
     TOKEN = load_token()
+    if TOKEN == "":
+        print("token为空")
+        print("第1步未完成，请先完成第1步登录时光相册")
+        input('按下回车键继续...')
+        return
     print("")
     print("正在获取原始数据...")
     get_original_message(token = TOKEN)
