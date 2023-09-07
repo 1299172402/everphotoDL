@@ -10,20 +10,19 @@ on:
     branches: [ "main" ]
   workflow_dispatch: 
 
-permissions:
-  contents: read
-
 jobs:
   build:
 
     runs-on: windows-latest
-
+    strategy:
+      matrix:
+        python-version: ["3.6", "3.10"]
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python
       uses: actions/setup-python@v3
       with:
-        python-version: "3.6"
+        python-version: ${{ matrix.python-version }}
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
@@ -36,5 +35,21 @@ jobs:
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v3.1.2
       with:
-        name: everphotoDL
+        name: everphotoDL-${{ matrix.python-version == '3.6' && 'windows_7' || 'windows_10' }}
         path: dist/everphotoDL.exe
+    - name: short-sha
+      uses: benjlevesque/short-sha@v2.2
+      id: short-sha
+    - name: Publish release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: |
+          dist/everphotoDL.exe
+        tag_name: beta
+        name: everphotoDL v.beta.${{ steps.short-sha.outputs.sha }}
+        body: |
+          # This a beta version
+        draft: false
+        prerelease: false
+        
+
