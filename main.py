@@ -4,6 +4,8 @@ import get_original_message
 import dl_picture
 
 import organize_photos
+import time_sort_photos
+import revert_photo_path
 
 import os
 import json
@@ -35,9 +37,8 @@ def interface():
     print("")
     print("整理功能")
     print("5. 智能整理照片")
-    # print("6. 按上传时间整理")
-    # print("7. 按拍摄时间整理")
-    # print("8. 恢复照片路径到整理前")
+    print("6. 按时间整理")
+    print("7. 恢复照片路径到整理前")
     print("")
     print("0. 退出程序")
     print("")
@@ -53,6 +54,10 @@ def interface():
         dl_picture.interface()
     elif choice == "5":
         organize_photos.interface()
+    elif choice == "6":
+        time_sort_photos.interface()
+    elif choice == "7":
+        revert_photo_path.interface()
     elif choice == "0":
         return 'exit'
     else:
