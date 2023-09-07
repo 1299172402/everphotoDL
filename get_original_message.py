@@ -24,7 +24,11 @@ def getupdates(cursor = "", token = ""):
     while retries < 10:
         try:
             res = requests.post(url, headers=headers, json={"cursor":cursor,"space_id":0}, timeout=5).json()
-            return res
+            if res["code"] == 0:
+                return res
+            else:
+                print(f"\n[失败] 请求GetUpdates失败，时光相册服务器返回：{res}，请重试")
+                return None
         except requests.Timeout:
             retries += 1
             print(f"\n[超时] 请求GetUpdates失败，重试中 ({retries}/10)")
