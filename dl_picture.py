@@ -92,6 +92,7 @@ def interface():
     print("正在添加下载列表...")
     download_picture_process(token = TOKEN, dl_path = DL_PATH, thread_num = thread_num, output_succeed = output_succeed)
     print("")
+    print("下载完成")
     input('按下回车键继续...')
 
 if __name__ == '__main__':
