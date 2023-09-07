@@ -3,6 +3,8 @@ import set_dl_path
 import get_original_message
 import dl_picture
 
+import organize_photos
+
 import os
 import json
 
@@ -31,6 +33,12 @@ def interface():
     print("3. 下载相册的元数据")
     print("4. 批量下载图片和视频")
     print("")
+    print("整理功能")
+    print("5. 智能整理照片")
+    # print("6. 按上传时间整理")
+    # print("7. 按拍摄时间整理")
+    # print("8. 恢复照片路径到整理前")
+    print("")
     print("0. 退出程序")
     print("")
     print("请输入数字：")
@@ -43,6 +51,8 @@ def interface():
         get_original_message.interface()
     elif choice == "4":
         dl_picture.interface()
+    elif choice == "5":
+        organize_photos.interface()
     elif choice == "0":
         return 'exit'
     else:

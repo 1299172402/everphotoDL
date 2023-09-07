@@ -3,6 +3,7 @@ __pycache__
 
 original_response
 config.json
+move_record.json
 
 build
 dist
