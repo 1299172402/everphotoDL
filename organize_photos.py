@@ -7,9 +7,6 @@ def organize_picture():
     conn = sqlite3.connect('move_record.db')
     c = conn.cursor()
     c.execute('''CREATE TABLE IF NOT EXISTS move_record (source text, target text)''')
-    if os.path.exists('move_record.json') == False:
-        with open('move_record.json', 'w', encoding='utf-8') as f:
-            f.write(json.dumps([], ensure_ascii=False, indent=4))
 
     for file in os.listdir('original_response'):
         with open(f'original_response/{file}', 'r', encoding='utf-8') as f:
