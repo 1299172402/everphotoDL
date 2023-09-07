@@ -13,6 +13,9 @@ def load_dl_path():
         config = json.load(f)
     return config['dl_path']
 
+class ServiceError(Exception):
+    pass
+
 def getupdates(cursor = "", token = ""):
     url = "https://openapi.everphoto.cn/sf/3/v4/GetUpdates"
     headers = {
@@ -27,12 +30,15 @@ def getupdates(cursor = "", token = ""):
             if res["code"] == 0:
                 return res
             else:
-                print(f"\n[失败] 请求GetUpdates失败，时光相册服务器返回：{res}，请重试")
-                return None
+                raise ServiceError(res)
         except requests.Timeout:
             retries += 1
             print(f"\n[超时] 请求GetUpdates失败，重试中 ({retries}/10)")
             time.sleep(5)
+        except ServiceError as e:
+            retries += 1
+            print(f"\n[失败] 请求GetUpdates失败，服务器返回：{e}，10秒后重试 ({retries}/10)")
+            time.sleep(10)
     print("\n[失败] 请求GetUpdates失败，请重试")
     return None
         
