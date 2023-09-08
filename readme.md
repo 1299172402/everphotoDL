@@ -62,11 +62,9 @@ Github开源地址: https://github.com/1299172402/everphotoDL
 
 - [x] 按文件夹分类存放，来源为上传时的文件夹，无来源的放在根文件夹
 - [x] 按上传时间、照片时间分类存放
-- [ ] 为了方便整理，每个图片文件都的信息都放到一个单独的json中（包括上传时间`uploadedAt`，拍摄时间`creationTime` `taken`，宽`width`，高`height`，在手机时的路径（包括原始文件名）`source_path`，EXIF信息`exif`，文件大小`size`，文件校验`md5`）
-- [ ] OCR文本识别的内容 `https://openapi.everphoto.cn/sf/3/v4/GetAssetCvInfo`
-- [ ] 标签归类，包括自建的相册，人物分类，或者截屏、风景、美食等时光相册自动打的tag
-- [ ] (低优先级)人脸信息`https://openapi.everphoto.cn/sf/3/v4/GetAssetFaceFeature`
-- [ ] (低优先级)位置信息`https://openapi.everphoto.cn/v1/locations`
+- [x] 将所有的照片数据、信息等写入db文件(sqlite)
+- [ ] 写入EXIF
+- [ ] 共享相册下载
 - [x] (低优先级)为程序设计图形界面
 
 ## 打包方式

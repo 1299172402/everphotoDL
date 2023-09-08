@@ -3,9 +3,8 @@ __pycache__
 
 original_response
 space
-config.json
-move_record.json
-everphoto.db
+config*.json
+everphoto*.db
 
 build
 dist

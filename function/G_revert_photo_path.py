@@ -1,6 +1,7 @@
 import os
 import json
 import sqlite3
+import function.tools.config_io as config_io
 
 def move_picture(dl_path, source, target):
     if os.path.exists(f"{dl_path}/{target}") == True:
@@ -11,21 +12,27 @@ def move_picture(dl_path, source, target):
             print(f"[失败] {source} 无法恢复，来源 {target}，目录已有同名文件")
 
 def revert_photo_path():
-    dl_path = json.load(open('config.json', 'r', encoding='utf-8'))['dl_path']
-    conn = sqlite3.connect('move_record.db')
+    dl_path = config_io.load('dl_path')
+    conn = sqlite3.connect('everphoto.db')
     c = conn.cursor()
     c.execute('SELECT source, target FROM move_record')
     record = c.fetchall()
     conn.close()
     for source, target in record:
         move_picture(dl_path, source, target)
-    os.remove('move_record.db')
+    
+    conn = sqlite3.connect('everphoto.db')
+    c = conn.cursor()
+    c.execute('DELETE FROM move_record')
+    conn.commit()
+    conn.close()
+
     for item in os.listdir(dl_path):
         if os.path.isdir(f"{dl_path}/{item}") == True:
             try:
                 os.rmdir(f"{dl_path}/{item}")
             except:
-                print(f"{item} 目录非空，跳过删除")
+                print(f"[跳过] {item} 目录非空，跳过删除")
                 pass
 
 def interface():
@@ -37,10 +44,22 @@ def interface():
     print("1. 整理后已移动或重命名的文件无法恢复到之前的路径，将跳过")
     print("")
     print("正在检测是否整理过...")
-    if os.path.exists('move_record.db') == False:
-        print("未检测到move_record.db，未整理过")
+    conn = sqlite3.connect('everphoto.db')
+    c = conn.cursor()
+    c.execute("SELECT count(*) FROM sqlite_master WHERE type='table' AND name='move_record'")
+    if c.fetchone()[0] == 0:
+        conn.close()
+        print("未检测到整理记录，无需恢复")
         input("按回车键继续...")
         return
+    else:
+        c.execute('SELECT source, target FROM move_record')
+        record = c.fetchall()
+        conn.close()
+        if len(record) == 0:
+            print("未检测到整理记录，无需恢复")
+            input("按回车键继续...")
+            return
     print("是否恢复到整理之前：")
     print("1. 是")
     print("2. 否")
