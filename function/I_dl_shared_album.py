@@ -1,19 +1,11 @@
 import os
-import requests
 import json
 import hashlib
+import sqlite3
+import function.tools.config_io as config_io
+import function.tools.everphotoAPI as everphotoAPI
 
 from concurrent.futures import ThreadPoolExecutor
-
-def load_token():
-    with open('config.json', 'r', encoding='utf-8') as f:
-        config = json.load(f)
-    return config['token']
-
-def load_dl_path():
-    with open('config.json', 'r', encoding='utf-8') as f:
-        config = json.load(f)
-    return config['dl_path']
 
 def check_md5(file_path, md5):
     with open(file_path, 'rb') as f:
@@ -24,9 +16,6 @@ def check_md5(file_path, md5):
             return False
 
 def download_picture(asset, token, dl_path, output_succeed):
-    if asset['deleted'] == True:
-        return 'deleted'
-    
     filename = f'{asset["id"]}.{asset["mime"].split("/")[1]}'
     filepath = f'{dl_path}/{filename}'
 
@@ -34,19 +23,9 @@ def download_picture(asset, token, dl_path, output_succeed):
         if check_md5(filepath, asset['md5']) == True:
             print(f'[跳过] {filename} 文件已下载，校验成功') if output_succeed == True else None
             return 'check_succeed'
-        else:
-            os.remove(filepath)
-            print(f'[失败] {filename} 文件已下载，校验失败，文件已删除')
     
-    # download
-    url = f'https://media.everphoto.cn/origin/{asset["id"]}'
-    headers = {
-        "authorization": f"Bearer {token}", 
-    }
-    res = requests.get(url, headers=headers)
-    with open(filepath, 'wb') as f:
-        f.write(res.content)
-    # check md5
+    everphotoAPI.Download_Media(token, asset["id"], filepath)
+    
     if check_md5(filepath, asset['md5']) == True:
         print(f'[成功] {filename} 文件下载成功，校验成功')
         return 'download_succeed'
@@ -59,26 +38,39 @@ def download_picture_process(token, dl_path, thread_num, output_succeed):
     if os.path.exists(dl_path) == False:
         os.makedirs(dl_path)
     with ThreadPoolExecutor(max_workers=thread_num) as executor:
-        for file in os.listdir('original_response'):
-            with open(f'original_response/{file}', 'r', encoding="utf-8") as f:
-                data = json.load(f)
-                for asset in data['data']['user_data']['asset_list']:
-                    executor.submit(download_picture, asset, token, dl_path, output_succeed)
+        conn = sqlite3.connect('everphoto.db')
+        c = conn.cursor()
+        c.execute("SELECT json_data FROM shared_asset")
+        data = c.fetchall()
+        for item in data:
+            item = json.loads(item[0])
+            if item['deleted'] == True:
+                continue
+            executor.submit(download_picture, item, token, dl_path, output_succeed)
 
 def interface():
     os.system('cls')
     print("时光相册下载器")
-    print("当前进度：4. 批量下载图片")
+    print("当前进度：10. 批量下载共享相册的图片")
     print("")
-    print("正在检查第3步是否完成...")
-    if os.path.exists('original_response') == False:
-        print("第3步未完成，请先完成第3步下载原始数据")
-        input('按下回车键继续...')
+    print("注意事项：")
+    print("1. 请自行确认第9步下载共享相册的元数据是否完成")
+    print("2. 如果未完成第9步，可能会导致下载失败")
+    print("")
+    print("是否开始下载：")
+    print("1. 是")
+    print("2. 否")
+    choice = input("请输入数字：")
+    if choice == "1":
+        pass
+    else:
+        print("已取消下载")
+        input("按回车键继续...")
         return
     print("正在加载token...")
-    TOKEN = load_token()
+    TOKEN = config_io.load("token")
     print("正在加载下载路径...")
-    DL_PATH = load_dl_path()
+    DL_PATH = config_io.load("share_dl_path")
     print("请输入同时下载数（默认为 16 ）：")
     thread_num = int(input() or 16)
     print("是否显示 [跳过] 的信息：")

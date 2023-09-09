@@ -1,13 +1,6 @@
 import os
 import requests
-import json
-
-def save_token(token):
-    with open('config.json', 'r', encoding='utf-8') as f:
-        config = json.load(f)
-    config['token'] = token
-    with open('config.json', 'w', encoding='utf-8') as f:
-        f.write(json.dumps(config, ensure_ascii=False, indent=4))
+import function.tools.config_io as config_io
 
 def check_token(token):
     url = 'https://web.everphoto.cn/api/users/self/profile'
@@ -17,7 +10,7 @@ def check_token(token):
     try:
         res = requests.get(url, headers=headers).json()
         if res['code'] == 0:
-            save_token(token)
+            config_io.save("token", token)
             print(f'[用户名] {res["data"]["name"]}')
             print(f'[手机号] {res["data"]["mobile"]}')
             print(f'[性别] {res["data"]["estimate_gender"]}')
@@ -32,7 +25,7 @@ def check_token(token):
             print(f'[文件最大上传大小] {res["data"]["max_file_size"]}')
             print(f'[回收站保留天数] {res["data"]["trash_show_days"]}')
             print(f'')
-            print(f'[成功] token有效，已保存到config.json')
+            print(f'[成功] token有效，已保存到everphoto.json')
         else:
             print(f'[失败] token无效，未保存，请检查token是否正确')
         input('按下回车键继续...')
