@@ -11,7 +11,7 @@ def organize_picture():
     c.execute('''CREATE TABLE IF NOT EXISTS move_record (source TEXT, target TEXT)''')
     conn.commit()
 
-    c.execute("SELECT json_data FROM asset")
+    c.execute("SELECT json_data FROM personal_asset")
     data = c.fetchall()
     for asset in data:
         asset = json.loads(asset[0])

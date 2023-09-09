@@ -7,6 +7,10 @@ import function.E_organize_photos as E_organize_photos
 import function.F_time_sort_photos as F_time_sort_photos
 import function.G_revert_photo_path as G_revert_photo_path
 
+import function.H_get_share_meta as H_get_share_meta
+import function.I_dl_shared_album as I_dl_shared_album
+import function.J_sort_shared_album as J_sort_shared_album
+
 import os
 import function.tools.config_io as config_io
 
@@ -29,6 +33,13 @@ def interface():
     print("6. 按时间整理")
     print("7. 恢复照片路径到整理前")
     print("")
+    print("共享相册")
+    print("8. 设置共享相册下载路径" + f" {config_io.load('share_dl_path')} ")
+    print("9. 下载共享相册的元数据")
+    print("10. 批量下载共享相册的图片")
+    print("11. 整理共享相册的信息、图片、视频、动态、评论、点赞")
+    print("12. 恢复共享相册的路径到整理前")
+    print("")
     print("0. 退出程序")
     print("")
     print("请输入数字：")
@@ -36,7 +47,7 @@ def interface():
     if choice == "1":
         A_save_token.interface()
     elif choice == "2":
-        B_set_dl_path.interface()
+        B_set_dl_path.interface(type = "personal")
     elif choice == "3":
         C_get_meta.interface()
     elif choice == "4":
@@ -46,11 +57,22 @@ def interface():
     elif choice == "6":
         F_time_sort_photos.interface()
     elif choice == "7":
-        G_revert_photo_path.interface()
+        G_revert_photo_path.interface(type = "personal")
+    elif choice == "8":
+        B_set_dl_path.interface(type = "share")
+    elif choice == "9":
+        H_get_share_meta.interface()
+    elif choice == "10":
+        I_dl_shared_album.interface()
+    elif choice == "11":
+        J_sort_shared_album.interface()
+    elif choice == "12":
+        G_revert_photo_path.interface(type = "share")
     elif choice == "0":
         return 'exit'
     else:
         print("请输入正确的数字")
+        print("按下回车键继续...")
 
 if __name__ == '__main__':
     config_io.init()

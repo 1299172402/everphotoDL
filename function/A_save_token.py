@@ -25,7 +25,7 @@ def check_token(token):
             print(f'[文件最大上传大小] {res["data"]["max_file_size"]}')
             print(f'[回收站保留天数] {res["data"]["trash_show_days"]}')
             print(f'')
-            print(f'[成功] token有效，已保存到everphoto.db')
+            print(f'[成功] token有效，已保存到everphoto.json')
         else:
             print(f'[失败] token无效，未保存，请检查token是否正确')
         input('按下回车键继续...')

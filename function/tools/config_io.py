@@ -10,7 +10,6 @@ def init():
                 "token": "",
                 "dl_path": "D:/EverPhoto",
                 "share_dl_path": "D:/EverPhoto_Share",
-                "get_meta": "todo",
             }, indent = 4, ensure_ascii = False))
 
 def load(setting):
