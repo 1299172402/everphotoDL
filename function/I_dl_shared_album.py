@@ -67,6 +67,7 @@ def interface():
         print("已取消下载")
         input("按回车键继续...")
         return
+    print("")
     print("正在加载token...")
     TOKEN = config_io.load("token")
     print("正在加载下载路径...")

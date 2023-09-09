@@ -108,6 +108,18 @@ def interface():
     print("1. 如果遇到 [失败] ，请重复下载原始数据，直到成功为止")
     print("2. [超时] 的情况系统会自动重试，无需手动操作")
     print("3. 请自行检查各数量与手机APP显示的是否一致")
+    print("4. 请先执行第3步下载相册的元数据，再执行本步骤")
+    print("")
+    print("是否开始下载：")
+    print("1. 是")
+    print("2. 否")
+    choice = input("请输入数字：")
+    if choice == "1":
+        pass
+    else:
+        print("已取消下载")
+        input("按回车键继续...")
+        return
     print("")
     print("正在加载token...")
     if config_io.load("token") == "":
