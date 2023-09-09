@@ -5,8 +5,6 @@ import datetime
 
 import function.tools.config_io as config_io
 
-SHARE_DL_PATH = config_io.load("share_dl_path")
-
 def timestamp_format(ts, format='%Y-%m-%d %H:%M:%S'):
     return datetime.datetime.fromtimestamp(ts).strftime(format)
 
@@ -26,6 +24,7 @@ def get_member_name(space_id, user_id):
     return ""
 
 def sort_shared_album(info):
+    SHARE_DL_PATH = config_io.load("share_dl_path")
     space_id = info['id']
     name = info['name']
     if os.path.exists(f"{SHARE_DL_PATH}/{name}") == False:
