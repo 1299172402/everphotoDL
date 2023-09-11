@@ -22,7 +22,7 @@ def revert_photo_path():
     conn = sqlite3.connect('everphoto.db')
     c = conn.cursor()
     if style == "personal": 
-        c.execute('SELECT source, target FROM move_record')
+        c.execute('SELECT source, target FROM personal_move_record')
     elif style == "share":
         c.execute('SELECT source, target FROM shared_move_record')
     record = c.fetchall()
@@ -33,7 +33,7 @@ def revert_photo_path():
     conn = sqlite3.connect('everphoto.db')
     c = conn.cursor()
     if style == "personal":
-        c.execute('DELETE FROM move_record')
+        c.execute('DELETE FROM personal_move_record')
     elif style == "share":
         c.execute('DELETE FROM shared_move_record')
     conn.commit()
@@ -65,7 +65,7 @@ def interface(type = "personal"):
     conn = sqlite3.connect('everphoto.db')
     c = conn.cursor()
     if style == "personal":
-        c.execute("SELECT count(*) FROM sqlite_master WHERE type='table' AND name='move_record'")
+        c.execute("SELECT count(*) FROM sqlite_master WHERE type='table' AND name='personal_move_record'")
     elif style == "share":
         c.execute("SELECT count(*) FROM sqlite_master WHERE type='table' AND name='shared_move_record'")
     if c.fetchone()[0] == 0:
@@ -75,7 +75,7 @@ def interface(type = "personal"):
         return
     else:
         if style == "personal":
-            c.execute('SELECT source, target FROM move_record')
+            c.execute('SELECT source, target FROM personal_move_record')
         elif style == "share":
             c.execute('SELECT source, target FROM shared_move_record')
         record = c.fetchall()

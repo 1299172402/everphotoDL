@@ -8,7 +8,7 @@ def organize_picture_upload(sort, time):
     dl_path = config_io.load('dl_path')
     conn = sqlite3.connect('everphoto.db')
     c = conn.cursor()
-    c.execute('''CREATE TABLE IF NOT EXISTS move_record (source TEXT, target TEXT)''')
+    c.execute('''CREATE TABLE IF NOT EXISTS personal_move_record (source TEXT, target TEXT)''')
     conn.commit()
 
     c.execute("SELECT json_data FROM personal_asset")
@@ -42,7 +42,7 @@ def organize_picture_upload(sort, time):
         
         if os.path.exists(f"{dl_path}/{current_filename}") == True:
             if os.path.exists(f"{dl_path}/{source_folder}/{source_filename}") == False:
-                c.execute("INSERT INTO move_record VALUES (?, ?)", (f"{current_filename}", f"{source_folder}/{source_filename}"))
+                c.execute("INSERT INTO personal_move_record VALUES (?, ?)", (f"{current_filename}", f"{source_folder}/{source_filename}"))
                 os.rename(f"{dl_path}/{current_filename}", f"{dl_path}/{source_folder}/{source_filename}")
                 print(f"[成功] {current_filename} 文件已整理到 {source_folder}/{source_filename}")
             else:

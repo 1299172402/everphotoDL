@@ -11,6 +11,8 @@ import function.H_get_share_meta as H_get_share_meta
 import function.I_dl_shared_album as I_dl_shared_album
 import function.J_sort_shared_album as J_sort_shared_album
 
+import function.K_write_time as K_write_time
+
 import os
 import function.tools.config_io as config_io
 
@@ -40,6 +42,8 @@ def interface():
     print("11. 整理共享相册的信息、图片、视频、动态、评论、点赞")
     print("12. 恢复共享相册的路径到整理前")
     print("")
+    print("13. 写入照片时间到文件信息")
+    print("")
     print("0. 退出程序")
     print("")
     print("请输入数字：")
@@ -68,6 +72,8 @@ def interface():
         J_sort_shared_album.interface()
     elif choice == "12":
         G_revert_photo_path.interface(type = "share")
+    elif choice == "13":
+        K_write_time.interface()
     elif choice == "0":
         return 'exit'
     else:
