@@ -34,8 +34,8 @@ keywords: 时光相册, 打包下载, 批量下载, 全部下载
 作者：之雨
 Github开源地址: https://github.com/1299172402/everphotoDL
 
-下载功能
 请按照以下步骤一步步操作：
+下载功能
 1. 登录时光相册
 2. 设置下载路径 D:/EverPhoto
 3. 下载相册的元数据
