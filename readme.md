@@ -15,7 +15,7 @@ keywords: 时光相册, 打包下载, 批量下载, 全部下载
 
 - Github Release
   
-  [![img](https://img.shields.io/github/v/release/1299172402/BBDown_GUI?label=%E7%89%88%E6%9C%AC)](https://github.com/1299172402/BBDown_GUI/releases)
+  [![img](https://img.shields.io/github/v/release/1299172402/everphotoDL?label=版本)](https://github.com/1299172402/everphotoDL/releases)
   
 - 蓝奏云
 
@@ -72,7 +72,7 @@ Github开源地址: https://github.com/1299172402/everphotoDL
 - [x] 按文件夹分类存放，来源为上传时的文件夹，无来源的放在根文件夹
 - [x] 按上传时间、照片时间分类存放
 - [x] 将所有的照片数据、信息等写入db文件(sqlite)
-- [x] ~~jpeg、heif写入EXIF, mp4写入媒体创建时间~~ 写入拍摄时间到文件的修改时间（可以不改变原始数据）
+- [x] 写入拍摄时间到文件的修改时间（可以不改变原始数据）
 - [x] 共享相册下载
 - [x] (低优先级)为程序设计图形界面
 
@@ -88,7 +88,7 @@ pyinstaller --noconfirm --onefile --console --icon "kite.ico"  "main.py"
 
 - 如果遇到程序闪退，请尝试以下操作：
   1. 退出程序
-  2. 删除与程序同一目录下的`original_response`文件夹
+  2. 删除与程序同一目录下的`everphoto.db`和`config.json`文件
   3. 启动程序，并从头重新开始操作
 
 
@@ -102,4 +102,4 @@ pyinstaller --noconfirm --onefile --console --icon "kite.ico"  "main.py"
 
 我还没倒呢！你先倒了！┭┮﹏┭┮
 
-聚散终有时啊
+相聚两依依，聚散终有时。时光相册，安好~
