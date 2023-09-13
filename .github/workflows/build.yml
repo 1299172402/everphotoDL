@@ -6,8 +6,14 @@ name: Python application
 on:
   push:
     branches: [ "main" ]
+    paths-ignore:
+      - '.github/**'
+      - '**.md'
   pull_request:
     branches: [ "main" ]
+    paths-ignore:
+      - '.github/**'
+      - '**.md'
   workflow_dispatch: 
     inputs:
       python_version:
