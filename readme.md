@@ -103,3 +103,11 @@ pyinstaller --noconfirm --onefile --console --icon "kite.ico"  "main.py"
 我还没倒呢！你先倒了！┭┮﹏┭┮
 
 相聚两依依，聚散终有时。时光相册，安好~
+
+## 捐赠作者
+
+<details>
+  <summary>如果我帮助到了你，欢迎并且谢谢你的捐赠 💃💃❤🧡💛💙💚💜🖤💃💃（点击展开）</summary>
+  <img src="https://archive.biliimg.com/bfs/archive/905b63819805cf2a523c1b8f1b0ed0220de3d223.png@500h.webp" referrerpolicy="no-referrer" >
+  <img src="https://archive.biliimg.com/bfs/archive/8f0c67d748500ce0b8aeaa824740791de0cdefc6.png@500h.webp" referrerpolicy="no-referrer" >
+</details>
