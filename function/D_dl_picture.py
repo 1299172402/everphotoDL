@@ -62,8 +62,7 @@ def interface():
     TOKEN = config_io.load("token")
     print("正在加载下载路径...")
     DL_PATH = config_io.load("dl_path")
-    print("请输入同时下载数（默认为 16 ）：")
-    thread_num = int(input() or 16)
+    thread_num = int(input("请输入同时下载数（默认为 16 ）：") or 16)
     print("是否显示 [跳过] 的信息：")
     print("1. 是（默认）")
     print("2. 否")
@@ -72,10 +71,18 @@ def interface():
         output_succeed = True
     else:
         output_succeed = False
-    print("正在添加下载列表...")
-    download_picture_process(token = TOKEN, dl_path = DL_PATH, thread_num = thread_num, output_succeed = output_succeed)
     print("")
-    print("下载完成")
+    print("是否开始下载：")
+    print("1. 是")
+    print("2. 否")
+    choice = input("请输入数字：")
+    if choice == "1":
+        print("正在添加下载列表...")
+        download_picture_process(token = TOKEN, dl_path = DL_PATH, thread_num = thread_num, output_succeed = output_succeed)
+        print("")
+        print("下载完成")
+    else:
+        print("已取消下载")
     input('按下回车键继续...')
 
 if __name__ == '__main__':

@@ -45,6 +45,7 @@ def get_original_message():
             print("\n[成功] 相册元数据获取完成")
             break
         if res == None:
+            print("\n[失败] 请求GetUpdates失败，请重试")
             break
         elif res['code'] != 0:
             res = everphotoAPI.GetUpdates(token, cursor, space_id)

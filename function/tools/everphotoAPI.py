@@ -25,7 +25,6 @@ def GetUpdates(token = "", cursor = "", space_id = 0):
         except ServiceError as e:
             retries += 1
             time.sleep(10)
-    print("\n[失败] 请求GetUpdates失败，请重试")
     return None
 
 def Download_Media(token, id, path):

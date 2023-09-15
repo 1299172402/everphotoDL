@@ -57,17 +57,6 @@ def interface():
     print("1. 请自行确认第9步下载共享相册的元数据是否完成")
     print("2. 如果未完成第9步，可能会导致下载失败")
     print("")
-    print("是否开始下载：")
-    print("1. 是")
-    print("2. 否")
-    choice = input("请输入数字：")
-    if choice == "1":
-        pass
-    else:
-        print("已取消下载")
-        input("按回车键继续...")
-        return
-    print("")
     print("正在加载token...")
     TOKEN = config_io.load("token")
     print("正在加载下载路径...")
@@ -82,6 +71,18 @@ def interface():
         output_succeed = True
     else:
         output_succeed = False
+    print("")
+    print("是否开始下载：")
+    print("1. 是")
+    print("2. 否")
+    choice = input("请输入数字：")
+    if choice == "1":
+        pass
+    else:
+        print("已取消下载")
+        input("按回车键继续...")
+        return
+    print("")
     print("正在添加下载列表...")
     download_picture_process(token = TOKEN, dl_path = DL_PATH, thread_num = thread_num, output_succeed = output_succeed)
     print("")
