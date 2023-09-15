@@ -49,9 +49,11 @@ def modify_picture_time(type):
         if asset["deleted"] == True:
             continue
         generatedAt = asset["generatedAt"]
-        generatedAt = generatedAt.replace('T', ' ').replace('+08:00', '')
+        generatedAt = generatedAt.replace('T', ' ')
         if '.' in generatedAt:
             generatedAt = generatedAt.split('.')[0]
+        if '+' in generatedAt:
+            generatedAt = generatedAt.split('+')[0]
         generatedAt = int(time.mktime(time.strptime(generatedAt, "%Y-%m-%d %H:%M:%S")))
         filename = f'{asset["id"]}.{asset["mime"].split("/")[1]}'
         if sorted == True:
