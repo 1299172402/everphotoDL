@@ -62,8 +62,11 @@ def modify_picture_time(type):
             record = c.fetchone()
             if record != None:
                 filename = record[1]
-        print("[成功] 写入", filename, "时间为", asset["generatedAt"], "(", generatedAt, ")")
-        modify_time(f'{path}/{filename}', generatedAt)
+        if os.path.exists(f'{path}/{filename}') == True:
+            modify_time(f'{path}/{filename}', generatedAt)
+            print("[成功] 写入", filename, "时间为", asset["generatedAt"], "(", generatedAt, ")")
+        else:
+            print("[失败] 文件", filename, "不存在，无法写入时间")
     conn.close()
 
 
