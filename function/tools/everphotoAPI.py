@@ -1,5 +1,6 @@
 import requests
 import time
+import logging
 
 class ServiceError(Exception):
     pass
@@ -14,7 +15,12 @@ def GetUpdates(token = "", cursor = "", space_id = 0):
     retries = 0
     while retries < 10:
         try:
+            logging.debug("开始获取GetUpdates...")
+            logging.debug(f"cursor: {cursor}")
+            logging.debug(f"space_id: {space_id}")
             res = requests.post(url, headers=headers, json={"cursor":cursor,"space_id":space_id}, timeout=5).json()
+            logging.debug("获取结束GetUpdates")
+            logging.debug(f"res: {res}")
             if res["code"] == 0:
                 return res
             else:

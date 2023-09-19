@@ -14,6 +14,7 @@ import function.J_sort_shared_album as J_sort_shared_album
 import function.K_write_time as K_write_time
 
 import os
+import logging
 import function.tools.config_io as config_io
 
 def interface():
@@ -79,10 +80,18 @@ def interface():
     else:
         print("请输入正确的数字")
         print("按下回车键继续...")
+        input()
 
 if __name__ == '__main__':
+    logging.basicConfig(format='[%(asctime)s] [%(levelname)s] %(message)s', datefmt='%Y-%m-%d %H:%M:%S', filename='everphoto.log', encoding='utf-8', level=logging.DEBUG)
     config_io.init()
     while True:
-        res = interface()
-        if res == 'exit':
-            break
+        try:
+            res = interface()
+            if res == 'exit':
+                break
+        except Exception as e:
+            logging.exception('Exception Logged')
+            input("程序出现异常，已写入日志everphoto.log。按下回车键继续...")
+        except KeyboardInterrupt as e:
+            print("程序已手动终止...")

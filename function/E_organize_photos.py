@@ -1,6 +1,7 @@
 import os
 import json
 import sqlite3
+import logging
 
 import function.tools.config_io as config_io
 
@@ -14,6 +15,9 @@ def organize_picture():
     c.execute("SELECT json_data FROM personal_asset")
     data = c.fetchall()
     for asset in data:
+        logging.debug("E开始整理asset...")
+        logging.debug("asset原始值：")
+        logging.debug(asset)
         asset = json.loads(asset[0])
         if asset['deleted'] == True:
             continue
@@ -29,6 +33,10 @@ def organize_picture():
         source_folder = source_folder.replace('|', '_').replace('?', '_').replace('*', '_').replace('<', '_').replace('>', '_').replace(':', '_').replace('"', '_').replace('/', '_').replace('\\', '_')
         source_filename = source_filename.replace('|', '_').replace('?', '_').replace('*', '_').replace('<', '_').replace('>', '_').replace(':', '_').replace('"', '_').replace('/', '_').replace('\\', '_')
 
+        logging.debug(f"开始设置current_filename...")
+        logging.debug(f"asset: {asset}")
+        logging.debug(f"asset['id']: {asset['id']}")
+        logging.debug(f"asset['mime']: {asset['mime']}")
         current_filename = f"{asset['id']}.{asset['mime'].split('/')[1]}"
 
         if os.path.exists(f"{dl_path}/{source_folder}") == False:

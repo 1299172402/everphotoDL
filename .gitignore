@@ -5,6 +5,7 @@ original_response
 space
 config*.json
 everphoto*.db
+everphoto*.log
 
 build
 dist

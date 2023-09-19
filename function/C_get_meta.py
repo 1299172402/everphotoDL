@@ -1,6 +1,7 @@
 import os
 import json
 import sqlite3
+import logging
 import function.tools.everphotoAPI as everphotoAPI
 import function.tools.config_io as config_io
 
@@ -26,6 +27,7 @@ def load_latest_cursor():
         return cursor[0][0]
 
 def get_original_message():
+    logging.debug("开始获取原始数据...")
     conn = sqlite3.connect('everphoto.db')
     c = conn.cursor()
 
@@ -33,6 +35,11 @@ def get_original_message():
     cursor = load_latest_cursor()
     space_id = 0
     data_type = "user_data"
+
+    logging.debug(f"获取原始数据的初始设定：")
+    logging.debug(f"cursor: {cursor}")
+    logging.debug(f"space_id: {space_id}")
+    logging.debug(f"data_type: {data_type}")
 
     if cursor:
         res = everphotoAPI.GetUpdates(token, cursor, space_id)
