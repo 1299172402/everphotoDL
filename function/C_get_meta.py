@@ -80,6 +80,8 @@ def calc_picture_num():
             picture_num += 1
         elif item['mime'].startswith('video') and item['deleted'] == False:
             video_num += 1
+        elif item['mime'] == '' and item['subType'] == 'video' and item['deleted'] == False:
+            video_num += 1
     print(f"图片数量：{picture_num}")
     print(f"视频数量：{video_num}")
     conn.close()

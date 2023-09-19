@@ -37,7 +37,7 @@ def organize_picture():
         logging.debug(f"asset: {asset}")
         logging.debug(f"asset['id']: {asset['id']}")
         logging.debug(f"asset['mime']: {asset['mime']}")
-        current_filename = f"{asset['id']}.{asset['mime'].split('/')[1]}"
+        current_filename = f"{asset['id']}.{asset['mime'].split('/')[1]}" if asset['mime'] != '' else f"{asset['id']}.{asset['subType']}"
 
         if os.path.exists(f"{dl_path}/{source_folder}") == False:
             os.mkdir(f"{dl_path}/{source_folder}")
