@@ -18,7 +18,7 @@ def organize_picture_upload(sort, time):
         if asset['deleted'] == True:
             continue
 
-        current_filename = f"{asset['id']}.{asset['mime'].split('/')[1]}"
+        current_filename = f"{asset['id']}.{asset['mime'].split('/')[1]}" if asset['mime'] != '' else f"{asset['id']}.{asset['subType']}"
         source_path = asset['source_path']
 
         _, source_filename = os.path.split(source_path)

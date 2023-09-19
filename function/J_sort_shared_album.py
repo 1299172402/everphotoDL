@@ -105,7 +105,7 @@ def sort_shared_album(info):
             for shared_asset in shared_asset_list:
                 shared_asset = json.loads(shared_asset[0])
                 if shared_asset['id'] == asset_id:
-                    filename = f'{shared_asset["id"]}.{shared_asset["mime"].split("/")[1]}'
+                    filename = f'{shared_asset["id"]}.{shared_asset["mime"].split("/")[1]}' if shared_asset['mime'] != '' else f'{shared_asset["id"]}.{shared_asset["subType"]}'
                     if os.path.exists(f"{SHARE_DL_PATH}/{filename}") == False:
                         print(f"文件 {filename} 不存在，可能之前已移动到其他动态的文件夹中。当前目标文件夹 {name}/{timestamp_format(item['created_at'], '%Y-%m-%d-%H-%M-%S')}")
                         break

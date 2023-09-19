@@ -16,7 +16,7 @@ def check_md5(file_path, md5):
             return False
 
 def download_picture(asset, token, dl_path, output_succeed):
-    filename = f'{asset["id"]}.{asset["mime"].split("/")[1]}'
+    filename = f'{asset["id"]}.{asset["mime"].split("/")[1]}' if asset['mime'] != '' else f'{asset["id"]}.{asset["subType"]}'
     filepath = f'{dl_path}/{filename}'
 
     if os.path.exists(filepath) == True:

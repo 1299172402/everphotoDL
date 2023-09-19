@@ -55,7 +55,7 @@ def modify_picture_time(type):
         if '+' in generatedAt:
             generatedAt = generatedAt.split('+')[0]
         generatedAt = int(time.mktime(time.strptime(generatedAt, "%Y-%m-%d %H:%M:%S")))
-        filename = f'{asset["id"]}.{asset["mime"].split("/")[1]}'
+        filename = f'{asset["id"]}.{asset["mime"].split("/")[1]}' if asset['mime'] != '' else f'{asset["id"]}.{asset["subType"]}'
         if sorted == True:
             if style == "personal":
                 c.execute('SELECT source, target FROM personal_move_record WHERE source = ?', (filename,))

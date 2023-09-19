@@ -29,7 +29,7 @@ def organize_picture():
         source_folder = source_folder.replace('|', '_').replace('?', '_').replace('*', '_').replace('<', '_').replace('>', '_').replace(':', '_').replace('"', '_').replace('/', '_').replace('\\', '_')
         source_filename = source_filename.replace('|', '_').replace('?', '_').replace('*', '_').replace('<', '_').replace('>', '_').replace(':', '_').replace('"', '_').replace('/', '_').replace('\\', '_')
 
-        current_filename = f"{asset['id']}.{asset['mime'].split('/')[1]}"
+        current_filename = f"{asset['id']}.{asset['mime'].split('/')[1]}" if asset['mime'] != '' else f"{asset['id']}.{asset['subType']}"
 
         if os.path.exists(f"{dl_path}/{source_folder}") == False:
             os.mkdir(f"{dl_path}/{source_folder}")
