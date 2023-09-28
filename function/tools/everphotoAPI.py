@@ -19,6 +19,7 @@ def GetUpdates(token = "", cursor = "", space_id = 0):
                 return res
             else:
                 raise ServiceError(res)
+            time.sleep(1)
         except requests.Timeout:
             retries += 1
             time.sleep(5)
