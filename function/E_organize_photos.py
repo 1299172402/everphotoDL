@@ -17,6 +17,8 @@ def organize_picture():
         asset = json.loads(asset[0])
         if asset['deleted'] == True:
             continue
+        elif 'source_path' not in asset.keys():
+            continue
         elif asset['source_path'] == "":
             continue
         elif asset['source_path'].startswith('ios://'):

@@ -19,7 +19,7 @@ def organize_picture_upload(sort, time):
             continue
 
         current_filename = f"{asset['id']}.{asset['mime'].split('/')[1]}" if asset['mime'] != '' else f"{asset['id']}.{asset['subType']}"
-        source_path = asset['source_path']
+        source_path = asset['source_path'] if 'source_path' in asset.keys() else ""
 
         _, source_filename = os.path.split(source_path)
         if source_filename == "":
