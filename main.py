@@ -14,6 +14,7 @@ import function.J_sort_shared_album as J_sort_shared_album
 import function.K_write_time as K_write_time
 
 import os
+import traceback
 import function.tools.config_io as config_io
 
 def interface():
@@ -78,11 +79,19 @@ def interface():
         return 'exit'
     else:
         print("请输入正确的数字")
-        print("按下回车键继续...")
+        input("按下回车键继续...")
 
 if __name__ == '__main__':
     config_io.init()
     while True:
-        res = interface()
-        if res == 'exit':
+        try:
+            res = interface()
+            if res == 'exit':
+                break
+        except Exception as e:
+            print("程序出现异常，无法继续。出现的异常信息如下：")
+            traceback.print_exc()
+            input("按下回车键继续...")
+        except KeyboardInterrupt as e:
+            input("程序已手动终止。按下回车键继续...")
             break
