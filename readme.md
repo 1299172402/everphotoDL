@@ -2,7 +2,7 @@
 
 官网：https://www.everphoto.cn/
 
-keywords: 时光相册, 打包下载, 批量下载, 全部下载
+keywords: 时光相册 批量 打包 全部 下载 断点续传 路径 校验 整理 共享相册 EXIF 日期 时间 蓝奏
 
 ## 特点
 
