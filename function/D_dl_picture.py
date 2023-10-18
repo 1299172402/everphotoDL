@@ -23,15 +23,20 @@ def download_picture(asset, token, dl_path):
         # 跳过已下载并校验正确的文件
         if check_md5(filepath, asset['md5']) == True:
             return 'check_succeed'
+        # 删除曾经下载但校验失败的文件，之后将重新下载
+        else:
+            os.remove(filepath)
     
-    everphotoAPI.Download_Media(token, asset["id"], filepath)
+    if everphotoAPI.Download_Media(token, asset["id"], filepath) == True:
+        pass
+    else:
+        print(f'[失败] {filename} 文件下载失败')
     
     if check_md5(filepath, asset['md5']) == True:
         print(f'[成功] {filename} 文件下载成功，校验成功')
         return 'download_succeed'
     else:
-        os.remove(filepath)
-        print(f'[失败] {filename} 文件下载成功，校验失败，文件已删除')
+        print(f'[失败] {filename} 文件下载成功，校验失败')
         return 'download_fail'
 
 def download_picture_process(token, dl_path, thread_num):
@@ -52,6 +57,11 @@ def interface():
     os.system('cls')
     print("时光相册下载器")
     print("当前进度：4. 批量下载图片")
+    print("")
+    print("注意事项：")
+    print("1. 如果遇到 [失败]，重新执行可以继续下载未完成的内容，支持断点续传")
+    print("2. 失败时可以调节同时下载数，过大的同时下载数会使得校验出错的概率大大增加")
+    print("3. 如果没有任何 [XX] 的信息，并直接提示“下载完成”，说明所有照片都已经正常下载完毕")
     print("")
     print("正在检查第3步是否完成...")
     if os.path.exists('everphoto.db') == False:

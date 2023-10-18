@@ -33,9 +33,13 @@ def Download_Media(token, id, path):
     headers = {
         "authorization": f"Bearer {token}", 
     }
-    res = requests.get(url, headers=headers)
-    with open(path, 'wb') as f:
-        f.write(res.content)
+    try:
+        res = requests.get(url, headers=headers)
+        with open(path, 'wb') as f:
+            f.write(res.content)
+        return True
+    except:
+        return False
 
 if __name__ == '__main__':
     res = GetUpdates(token = "", cursor = "", space_id = 0)
