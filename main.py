@@ -1,17 +1,17 @@
-import function.A_save_token as A_save_token
-import function.B_set_dl_path as B_set_dl_path
-import function.C_get_meta as C_get_meta
-import function.D_dl_picture as D_dl_picture
+from function.A_save_token import interface as A_save_token
+from function.B_set_dl_path import interface as B_set_dl_path
+from function.C_get_meta import interface as C_get_meta
+from function.D_dl_picture import interface as D_dl_picture
 
-import function.E_organize_photos as E_organize_photos
-import function.F_time_sort_photos as F_time_sort_photos
-import function.G_revert_photo_path as G_revert_photo_path
+from function.E_organize_photos import interface as E_organize_photos
+from function.F_time_sort_photos import interface as F_time_sort_photos
+from function.G_revert_photo_path import interface as G_revert_photo_path
 
-import function.H_get_share_meta as H_get_share_meta
-import function.I_dl_shared_album as I_dl_shared_album
-import function.J_sort_shared_album as J_sort_shared_album
+from function.H_get_share_meta import interface as H_get_share_meta
+from function.I_dl_shared_album import interface as I_dl_shared_album
+from function.J_sort_shared_album import interface as J_sort_shared_album
 
-import function.K_write_time as K_write_time
+from function.K_write_time import interface as K_write_time
 
 import os
 import traceback
@@ -50,31 +50,31 @@ def interface():
     print("请输入数字：")
     choice = input()
     if choice == "1":
-        A_save_token.interface()
+        A_save_token()
     elif choice == "2":
-        B_set_dl_path.interface(type = "personal")
+        B_set_dl_path(type = "personal")
     elif choice == "3":
-        C_get_meta.interface()
+        C_get_meta()
     elif choice == "4":
-        D_dl_picture.interface()
+        D_dl_picture()
     elif choice == "5":
-        E_organize_photos.interface()
+        E_organize_photos()
     elif choice == "6":
-        F_time_sort_photos.interface()
+        F_time_sort_photos()
     elif choice == "7":
-        G_revert_photo_path.interface(type = "personal")
+        G_revert_photo_path(type = "personal")
     elif choice == "8":
-        B_set_dl_path.interface(type = "share")
+        B_set_dl_path(type = "share")
     elif choice == "9":
-        H_get_share_meta.interface()
+        H_get_share_meta()
     elif choice == "10":
-        I_dl_shared_album.interface()
+        I_dl_shared_album()
     elif choice == "11":
-        J_sort_shared_album.interface()
+        J_sort_shared_album()
     elif choice == "12":
-        G_revert_photo_path.interface(type = "share")
+        G_revert_photo_path(type = "share")
     elif choice == "13":
-        K_write_time.interface()
+        K_write_time()
     elif choice == "0":
         return 'exit'
     else:
