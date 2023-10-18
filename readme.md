@@ -77,11 +77,9 @@ Github开源地址: https://github.com/1299172402/everphotoDL
 - [x] 共享相册下载
 - [x] (低优先级)为程序设计图形界面
 
-## 打包方式
+## 开发指南
 
-```
-pyinstaller --noconfirm --onefile --console --icon "kite.ico"  "main.py"
-```
+[开发指南](developer.md)
 
 ## 其他说明
 
