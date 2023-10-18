@@ -12,6 +12,7 @@ from function.I_dl_shared_album import interface as I_dl_shared_album
 from function.J_sort_shared_album import interface as J_sort_shared_album
 
 from function.K_write_time import interface as K_write_time
+from function.album_sort import interface as album_sort
 
 import os
 import traceback
@@ -75,6 +76,8 @@ def interface():
         G_revert_photo_path(type = "share")
     elif choice == "13":
         K_write_time()
+    elif choice == "6.5":
+        album_sort()
     elif choice == "0":
         return 'exit'
     else:
