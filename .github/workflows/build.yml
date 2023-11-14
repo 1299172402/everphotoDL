@@ -37,7 +37,7 @@ jobs:
     - name: Pack the erverphotoDL
       run: |
         pip install pyinstaller
-        pyinstaller --noconfirm --onefile --console --icon "asset/kite.ico"  "src/main.py"
+        pyinstaller --noconfirm --onefile --console --icon "src/asset/kite.ico"  "src/main.py"
         Rename-Item -Path "dist/main.exe" -NewName "everphotoDL.exe"
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v3.1.2

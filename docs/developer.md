@@ -5,7 +5,6 @@
 ### 主目录
 ```
 ├─.github/workflows/build.yml  # 自动构建脚本
-├─asset/kite.ico # 资源文件(程序图标)
 ├─src # 源代码
 ├─.gitattributes
 ├─.gitignore
@@ -18,9 +17,9 @@
 ```
 # 主程序，包括初始化数据库，显示主菜单，追踪异常，具体功能从 function包 中调用
 │  main.py 
-│
+├─ asset/kite.ico # 资源文件(程序图标)
 # 各个功能模块
-└─function
+└─ function
     # 1. 登录时光相册
     │  A_save_token.py 
     # 2. 设置下载路径 / 8. 设置共享相册下载路径
@@ -56,5 +55,5 @@
 
 从仓库根目录运行
 ```
-pyinstaller --noconfirm --onefile --console --icon "asset/kite.ico"  "src/main.py"
+pyinstaller --noconfirm --onefile --console --icon "src/asset/kite.ico"  "src/main.py"
 ```
