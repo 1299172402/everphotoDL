@@ -2,6 +2,7 @@ import os
 import time
 import json
 import sqlite3
+from loguru import logger
 
 import function.tools.config_io as config_io
 
@@ -66,49 +67,33 @@ def modify_picture_time(type):
                 filename = record[1]
         if os.path.exists(f'{path}/{filename}') == True:
             modify_time(f'{path}/{filename}', generatedAt)
-            print("[成功] 写入", filename, "时间为", asset["generatedAt"], "(", generatedAt, ")")
+            logger.info("[成功] 写入", filename, "时间为", asset["generatedAt"], "(", generatedAt, ")")
         else:
-            print("[失败] 文件", filename, "不存在，无法写入时间")
+            logger.warning("[失败] 文件", filename, "不存在，无法写入时间")
     conn.close()
 
 
-def interface():
+def interface(type):
     os.system('cls')
     print("时光相册下载器")
-    print("当前进度：13. 写入照片时间到文件信息")
+    if type == "personal":
+        print("当前进度：5. 写入照片时间到文件信息")
+        logger.info("当前进度：5. 写入照片时间到文件信息")
+    elif type == "share":
+        print("当前进度：13. 写入照片时间到文件信息")
+        logger.info("当前进度：13. 写入照片时间到文件信息")
     print("")
     print("注意事项：")
     print("1. 本功能不是将信息写入EXIF，而是将拍摄时间信息写入文件修改时间")
     print("2. 本功能不会修改文件的原始数据本身，也就不会更改md5校验值")
     print("3. 本功能写入的是时光相册中的拍摄时间，不是上传时间")
     print("4. 请确认已经下载好元数据和照片后再使用此功能")
+    print("5. 只显示出错信息，所有处理日志在everphotoDL.log中")
     print("")
-    print("修改个人相册的照片时间还是共享相册的照片时间？")
-    print("1. 个人相册")
-    print("2. 共享相册")
-    choice = input("请输入数字：")
-    if choice == "1":
-        type = "personal"
-    elif choice == "2":
-        type = "share"
-    else:
-        print("输入错误")
-        input("按回车键继续...")
-        return
-    print("")
-    print("是否开始执行：")
-    print("1. 是")
-    print("2. 否")
-    choice = input("请输入数字：")
-    if choice == "1":
-        pass
-    else:
-        print("已取消下载")
-        input("按回车键继续...")
-        return
-    print("")
+    print("正在写入照片时间到文件信息，请稍后...")
     modify_picture_time(type)
-    input('按下回车键继续...')
+    print("")
+    print("写入完成！")
 
 if __name__ == "__main__":
     interface()

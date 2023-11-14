@@ -49,7 +49,7 @@ def organize_picture():
 def interface():
     os.system('cls')
     print("时光相册下载器")
-    print("当前进度：5. 智能整理照片（推荐）")
+    print("当前进度：7. 智能整理照片（推荐）")
     print("")
     print("注意事项：")
     print("1. 将恢复文件的原始名称")
@@ -67,7 +67,6 @@ def interface():
         print("整理完成")
     else:
         print("已取消整理")
-    input("按回车键继续...")
 
 if __name__ == '__main__':
     interface()

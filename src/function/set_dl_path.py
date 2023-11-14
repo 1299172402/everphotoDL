@@ -25,7 +25,7 @@ def interface(type):
     if style == "personal":
         print("当前进度：2. 设置下载路径")
     elif style == "share":
-        print("当前进度：8. 设置共享相册下载路径")
+        print("当前进度：10. 设置共享相册下载路径")
     print("")
     if style == "personal":
         display_dl_path('dl_path')
@@ -42,7 +42,6 @@ def interface(type):
         save_path('dl_path', path)
     elif style == "share":
         save_path('share_dl_path', path)
-    input("按回车键继续...")
 
 if __name__ == '__main__':
     interface()

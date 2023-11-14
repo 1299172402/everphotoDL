@@ -54,9 +54,9 @@ def interface(type = "personal"):
     os.system('cls')
     print("时光相册下载器")
     if style == "personal":
-        print("当前进度：7. 恢复照片路径到整理前")
+        print("当前进度：9. 恢复照片路径到整理前")
     elif style == "share":
-        print("当前进度：12. 恢复共享相册的路径到整理前")
+        print("当前进度：15. 恢复共享相册的路径到整理前")
     print("")
     print("注意事项：")
     print("1. 整理后已移动或重命名的文件无法恢复到之前的路径，将跳过")
@@ -71,7 +71,6 @@ def interface(type = "personal"):
     if c.fetchone()[0] == 0:
         conn.close()
         print("未检测到整理记录，无需恢复")
-        input("按回车键继续...")
         return
     else:
         if style == "personal":
@@ -82,7 +81,6 @@ def interface(type = "personal"):
         conn.close()
         if len(record) == 0:
             print("未检测到整理记录，无需恢复")
-            input("按回车键继续...")
             return
     print("是否恢复到整理之前：")
     print("1. 是")
@@ -93,7 +91,6 @@ def interface(type = "personal"):
         print("恢复整理完成")
     else:
         print("已取消恢复整理")
-    input("按回车键继续...")
 
 if __name__ == '__main__':
     interface()

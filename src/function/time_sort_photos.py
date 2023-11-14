@@ -54,7 +54,7 @@ def organize_picture_upload(sort, time):
 def interface():
     os.system('cls')
     print("时光相册下载器")
-    print("当前进度：6. 按时间整理")
+    print("当前进度：8. 按时间整理")
     print("")
     print("注意事项：")
     print("1. 将恢复文件的原始名称，IOS端上传的照片除外")
@@ -72,7 +72,6 @@ def interface():
         sort = "generatedAt"
     else:
         print("请输入正确的数字")
-        input("按回车键继续...")
         return
     print("")
 
@@ -89,7 +88,6 @@ def interface():
         time = "day"
     else:
         print("请输入正确的数字")
-        input("按回车键继续...")
         return
     print("")
 
@@ -102,7 +100,6 @@ def interface():
         print("整理完成")
     else:
         print("已取消整理")
-    input("按回车键继续...")
 
 if __name__ == '__main__':
     interface()

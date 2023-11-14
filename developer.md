@@ -11,7 +11,7 @@
 ├─.gitignore
 ├─developer.md # 开发指南
 ├─readme.md # 说明文档
-├─requirements.txt # 依赖库
+└─requirements.txt # 依赖库
 ```
 
 ### 代码目录
@@ -22,28 +22,35 @@
 # 各个功能模块
 └─function
     # 1. 登录时光相册
-    │  A_save_token.py 
-    # 2. 设置下载路径 / 8. 设置共享相册下载路径
-    │  B_set_dl_path.py
+    │  save_token.py 
+    # 2. 设置下载路径
+    │  set_dl_path.py
     # 3. 下载相册的元数据
-    │  C_get_meta.py
+    │  get_meta.py
     # 4. 批量下载图片和视频
-    │  D_dl_picture.py
-    # 5. 智能整理照片（推荐）
-    │  E_organize_photos.py
-    # 6. 按时间整理
-    │  F_time_sort_photos.py
-    # 7. 恢复照片路径到整理前 / 12. 恢复共享相册的路径到整理前
-    │  G_revert_photo_path.py
-    # 9. 下载共享相册的元数据
-    │  H_get_share_meta.py
-    # 10. 批量下载共享相册的图片
-    │  I_dl_shared_album.py
-    # 11. 整理共享相册的信息、图片、视频、动态、评论、点赞
-    │  J_sort_shared_album.py
+    │  dl_picture.py
+    # 5. 写入照片时间到文件信息
+    │  write_time.py
+    # 6. 按时光相册里的相册分类
+    │  album_sort.py
+    # 7. 智能整理照片（推荐）
+    │  organize_photos.py
+    # 8. 按时间整理到文件夹
+    │  time_sort_photos.py
+    # 9. 恢复照片路径到整理前
+    │  revert_photo_path.py
+    # 10. 设置共享相册下载路径
+    │  set_dl_path.py
+    # 11. 下载共享相册的元数据
+    │  get_share_meta.py
+    # 12. 批量下载共享相册的图片
+    |  dl_shared_album.py
     # 13. 写入照片时间到文件信息
-    │  K_write_time.py
-    │
+    |  write_time.py
+    # 14. 整理共享相册的信息、图片、视频、动态、评论、点赞
+    |  sort_shared_album.py
+    # 15. 恢复共享相册的路径到整理前
+    |  revert_photo_path.py
     # 一些工具函数
     └─tools
             # config.json 的读写

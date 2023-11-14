@@ -1,21 +1,19 @@
-from function.A_save_token import interface as A_save_token
-from function.B_set_dl_path import interface as B_set_dl_path
-from function.C_get_meta import interface as C_get_meta
-from function.D_dl_picture import interface as D_dl_picture
-
-from function.E_organize_photos import interface as E_organize_photos
-from function.F_time_sort_photos import interface as F_time_sort_photos
-from function.G_revert_photo_path import interface as G_revert_photo_path
-
-from function.H_get_share_meta import interface as H_get_share_meta
-from function.I_dl_shared_album import interface as I_dl_shared_album
-from function.J_sort_shared_album import interface as J_sort_shared_album
-
-from function.K_write_time import interface as K_write_time
+from function.save_token import interface as save_token
+from function.set_dl_path import interface as set_dl_path
+from function.get_meta import interface as get_meta
+from function.dl_picture import interface as dl_picture
+from function.organize_photos import interface as organize_photos
+from function.time_sort_photos import interface as time_sort_photos
+from function.revert_photo_path import interface as revert_photo_path
+from function.get_share_meta import interface as get_share_meta
+from function.dl_shared_album import interface as dl_shared_album
+from function.sort_shared_album import interface as sort_shared_album
+from function.write_time import interface as write_time
 from function.album_sort import interface as album_sort
 
 import os
-import traceback
+import sys
+from loguru import logger
 import function.tools.config_io as config_io
 
 def interface():
@@ -33,58 +31,73 @@ def interface():
     print("4. 批量下载图片和视频")
     print("")
     print("整理功能")
-    print("5. 智能整理照片（推荐）")
-    print("6. 按时间整理")
-    print("7. 恢复照片路径到整理前")
+    print("5. 写入照片时间到文件信息")
+    print("6. 按相册整理")
+    print("7. 智能整理照片（推荐）")
+    print("8. 按时间整理到文件夹")
+    print("9. 恢复照片路径到整理前")
     print("")
     print("共享相册")
-    print("8. 设置共享相册下载路径" + f" {config_io.load('share_dl_path')} ")
-    print("9. 下载共享相册的元数据")
-    print("10. 批量下载共享相册的图片")
-    print("11. 整理共享相册的信息、图片、视频、动态、评论、点赞")
-    print("12. 恢复共享相册的路径到整理前")
-    print("")
+    print("10. 设置共享相册下载路径" + f" {config_io.load('share_dl_path')} ")
+    print("11. 下载共享相册的元数据")
+    print("12. 批量下载共享相册的图片")
     print("13. 写入照片时间到文件信息")
+    print("14. 整理共享相册的信息、图片、视频、动态、评论、点赞")
+    print("15. 恢复共享相册的路径到整理前")
     print("")
     print("0. 退出程序")
     print("")
-    print("请输入数字：")
-    choice = input()
+    choice = input("请输入数字：")
+
+    # 下载功能
     if choice == "1":
-        A_save_token()
+        save_token()
     elif choice == "2":
-        B_set_dl_path(type = "personal")
+        set_dl_path(type = "personal")
     elif choice == "3":
-        C_get_meta()
+        get_meta()
     elif choice == "4":
-        D_dl_picture()
+        dl_picture()
+
+    # 整理功能
     elif choice == "5":
-        E_organize_photos()
+        write_time(type = 'personal')
     elif choice == "6":
-        F_time_sort_photos()
-    elif choice == "7":
-        G_revert_photo_path(type = "personal")
-    elif choice == "8":
-        B_set_dl_path(type = "share")
-    elif choice == "9":
-        H_get_share_meta()
-    elif choice == "10":
-        I_dl_shared_album()
-    elif choice == "11":
-        J_sort_shared_album()
-    elif choice == "12":
-        G_revert_photo_path(type = "share")
-    elif choice == "13":
-        K_write_time()
-    elif choice == "6.5":
         album_sort()
+    elif choice == "7":
+        organize_photos()
+    elif choice == "8":
+        time_sort_photos()
+    elif choice == "9":
+        revert_photo_path(type = "personal")
+
+    # 共享相册
+    elif choice == "10":
+        set_dl_path(type = "share")
+    elif choice == "11":
+        get_share_meta()
+    elif choice == "12":
+        dl_shared_album()
+    elif choice == "13":
+        write_time(type = 'share')
+    elif choice == "14":
+        sort_shared_album()
+    elif choice == "15":
+        revert_photo_path(type = "share")
+    
     elif choice == "0":
         return 'exit'
     else:
         print("请输入正确的数字")
-        input("按下回车键继续...")
 
 if __name__ == '__main__':
+    # 移除默认的控制台处理器
+    logger.remove()
+    # 设置控制台的日志级别为WARNING
+    logger.add(sys.stderr, level="WARNING")
+    # 设置文件的日志级别为INFO
+    logger.add("everphotoDL.log", encoding="utf-8", level="INFO")
+    logger.info("程序启动")
     config_io.init()
     while True:
         try:
@@ -93,8 +106,10 @@ if __name__ == '__main__':
                 break
         except Exception as e:
             print("程序出现异常，无法继续。出现的异常信息如下：")
-            traceback.print_exc()
-            input("按下回车键继续...")
+            logger.exception(e)
         except KeyboardInterrupt as e:
-            input("程序已手动终止。按下回车键继续...")
+            print("程序已手动终止")
+            logger.exception(e)
             break
+        input("按下回车键继续...")
+    logger.info("程序退出")

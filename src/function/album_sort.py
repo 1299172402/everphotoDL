@@ -57,7 +57,7 @@ def organize_picture():
             if os.path.exists(f"{dl_path}/{target_folder}/{target_filename}") == False:
                 c.execute("INSERT INTO personal_move_record VALUES (?, ?)", (f"{source_filename}", f"{target_folder}/{target_filename}"))
                 os.rename(f"{dl_path}/{source_filename}", f"{dl_path}/{target_folder}/{target_filename}")
-                print(f"[成功] {source_filename} 文件已整理到 {target_folder}/{target_filename}")
+                print(f"[成功] {source_filename} 移动到 {target_folder} 相册")
             else:
                 print(f"[跳过] {source_filename} 当前路径已有同名文件 {target_folder}/{target_filename}")
     
@@ -68,18 +68,11 @@ def organize_picture():
 def interface():
     os.system('cls')
     print("时光相册下载器")
-    print("当前进度：6.5 按相册整理")
+    print("当前进度：6. 按相册整理")
     print("")
-    print("是否开始整理：")
-    print("1. 是")
-    print("2. 否")
-    choice = input("请输入数字：")
-    if choice == "1":
-        organize_picture()
-        print("整理完成")
-    else:
-        print("已取消整理")
-    input("按回车键继续...")
+    print("整理中...")
+    organize_picture()
+    print("整理完成")
 
 if __name__ == '__main__':
     interface()

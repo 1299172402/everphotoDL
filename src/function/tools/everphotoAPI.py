@@ -4,6 +4,17 @@ import time
 class ServiceError(Exception):
     pass
 
+def get_profile(token):
+    url = 'https://web.everphoto.cn/api/users/self/profile'
+    headers = {
+        'authorization': f'Bearer {token}',
+    }
+    try:
+        res = requests.get(url, headers=headers).json()
+        return res
+    except:
+        return {'code': -1}
+
 def GetUpdates(token = "", cursor = "", space_id = 0):
     url = "https://openapi.everphoto.cn/sf/3/v4/GetUpdates"
     headers = {
@@ -25,7 +36,7 @@ def GetUpdates(token = "", cursor = "", space_id = 0):
         except ServiceError as e:
             retries += 1
             time.sleep(5)
-    return None
+    return {'code': -2}
 
 def Download_Media(token, id, path):
     url = f'https://media.everphoto.cn/origin/{id}'

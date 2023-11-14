@@ -85,17 +85,9 @@ def interface():
     print("当前进度：3. 下载相册的元数据")
     print("")
     print("注意事项：")
-    print("1. 如果遇到 [失败] ，请重复下载原始数据，直到成功为止")
-    print("2. [超时] 的情况系统会自动重试，无需手动操作")
-    print("3. 如果图片和视频的数量小于时光相册APP上显示的数量，请删除everphoto.db后重试")
-    print("4. 如果图片和视频的数量大于时光相册APP上显示的数量，表示曾重复上传某一图片，没有关系")
-    print("")
-    print("正在加载token...")
-    if config_io.load("token") == "":
-        print("token为空")
-        print("第1步未完成，请先完成第1步登录时光相册")
-        input('按下回车键继续...')
-        return
+    print("1. 请先完成第1步登录时光相册")
+    print("2. 如果遇到 [失败] ，请重复下载原始数据，直到成功为止（有断点续传）")
+    print("3. 如果图片和视频的数量小于时光相册APP“我的”页面上显示的数量，请删除everphoto.db后重新下载")
     print("")
     print("正在创建数据库...")
     create_table()
@@ -105,7 +97,6 @@ def interface():
     print("正在根据当前原始数据计算图片数量...")
     calc_picture_num()
     print("")
-    input('按下回车键继续...')
 
 if __name__ == '__main__':
     interface()

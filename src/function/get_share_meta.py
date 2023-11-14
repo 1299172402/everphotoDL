@@ -104,7 +104,7 @@ def calc_picture_num(space_id):
 def interface():
     os.system('cls')
     print("时光相册下载器")
-    print("当前进度：9. 下载共享相册的元数据")
+    print("当前进度：11. 下载共享相册的元数据")
     print("")
     print("注意事项：")
     print("1. 如果遇到 [失败] ，请重复下载原始数据，直到成功为止")
@@ -120,14 +120,12 @@ def interface():
         pass
     else:
         print("已取消下载")
-        input("按回车键继续...")
         return
     print("")
     print("正在加载token...")
     if config_io.load("token") == "":
         print("token为空")
         print("第1步未完成，请先完成第1步登录时光相册")
-        input('按下回车键继续...')
         return
     print("")
     print("正在创建数据表...")
@@ -149,7 +147,6 @@ def interface():
         print("正在根据当前原始数据计算图片数量...")
         calc_picture_num(space_id=space['id'])
         print("")
-    input('按下回车键继续...')
 
 if __name__ == '__main__':
     interface()
